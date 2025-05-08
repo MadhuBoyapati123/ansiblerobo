@@ -4,7 +4,7 @@
   tasks:
     - name: copy mongodb repo to yum.repos.d
       copy:
-        src: c:\Users\Hp\OneDrive\Desktop\ansiblerobo\mongo.repo
+        src: mongodb.repo
         dest: /etc/yum.repos.d/mongo.repo
 
     - name: install mongodb
