@@ -10,7 +10,7 @@
     - name: install mongodb
       yum:
         name: mongodb-org
-        state: insalled
+        state: installed
 
     - name: start and enable mongodb
       service:
