@@ -1,6 +1,6 @@
 - name: install catalogue components
-  become: yes
   hosts: catalogue
+  become: yes
   tasks:
     - name: setup NPM Source
       shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash"
