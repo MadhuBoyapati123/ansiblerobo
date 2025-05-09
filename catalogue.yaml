@@ -2,38 +2,35 @@
   become: yes
   hosts: catalogue
   tasks:
-  - name : setup NPM Source
-    shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash "
+    - name: setup NPM Source
+      shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash"
 
-  - name: install nodejs
-    yum:
-      name: nodejs
-      state: installed
-  
-  - name: check roboshop user exit or not
-    command: id roboshop
-    register: out
-    ignore_errors: yes
+    - name: install nodejs
+      yum:
+        name: nodejs
+        state: installed
 
-  - when: out.rc != 0
-    name: create roboshop user
-    become: yes
-    user:
-      name: roboshop
+    - name: check roboshop user exists or not
+      command: id roboshop
+      register: out
+      ignore_errors: yes
 
-  - name: check /app directory exit or not
-    ansible.builtin.stat:
-      path: /app
-    register: directory
-  - name: print the directory stat
-    debug:
-      msg: "output: {{ directory }}"
+    - name: create roboshop user
+      user:
+        name: roboshop
+      when: out.rc != 0
 
-  - when: directory.stat.exits == false
-    name: create /app directory
-    file:
-      path: /app
-      state: directory
+    - name: check /app directory exists or not
+      ansible.builtin.stat:
+        path: /app
+      register: directory
 
+    - name: print the directory stat
+      debug:
+        msg: "output: {{ directory }}"
 
-  
+    - name: create /app directory
+      file:
+        path: /app
+        state: directory
+      when: directory.stat.exists == false
