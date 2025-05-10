@@ -42,6 +42,6 @@
 
     - name: unzip catalogue artifact
       ansible.builtin.unarchive:
-        src: /app/catalogue.zip
+        src: /tmp/catalogue.zip
         dest: /app
         remote_src: yes
