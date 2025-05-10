@@ -35,12 +35,12 @@
         state: directory
       when: directory.stat.exists == false
 
-    - name: download catalogue artifact
+    - name: Download catalogue artifact
       ansible.builtin.get_url:
-        url: "https://roboshop-builds.s3.amazonaws.com/catalogue.zip"
-        dest: /tmp
+        url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+        dest: /tmp/catalogue.zip
 
-    - name: unzip catalogue artifact
+    - name: Unzip catalogue artifact
       ansible.builtin.unarchive:
         src: /tmp/catalogue.zip
         dest: /app
